@@ -6,10 +6,19 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Fetch DB connection URL from environment or default to local MySQL
-DATABASE_URL = os.getenv("DATABASE_URL", "mysql+pymysql://root:password@localhost:3306/CloudRail")
+# Replace 'YOUR_ACTUAL_PASSWORD' with your real MySQL root password
+# If you set NO password during setup, use: "mysql+pymysql://root@localhost:3306/CloudRail"
+DATABASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "mysql+pymysql://root:197465@localhost:3306/CloudRail?connect_timeout=3"
+)
 
-engine = create_engine(DATABASE_URL, pool_pre_ping=True)
+engine = create_engine(
+    DATABASE_URL, 
+    pool_pre_ping=True,
+    pool_recycle=3600
+)
+
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
