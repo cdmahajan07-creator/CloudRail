@@ -1,2 +1,2 @@
 # CloudRail
-Online Railway booking and Managaement System
+Online Railway booking and Management System
